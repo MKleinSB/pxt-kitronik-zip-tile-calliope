@@ -1,7 +1,7 @@
 {
     "name": "pxt-kitronik-zip-tile-calliope",
     "version": "0.0.0",
-      "description": "Blocks for driving the Kitronik ZIP Tile",
+    "description": "Blocks for driving the Kitronik ZIP Tile",
     "license": "MIT",
     "dependencies": {
         "core": "*",
