@@ -691,7 +691,7 @@ namespace Kitronik_Zip_Tile {
      * @param vArrange the number of ZIP Tiles connected vertically, eg: 1
      * @param uBitConfig postion of the microbit in the display (for a single tile, leave as 'Standard')
      */
-    //% blockId="kitronik_zip_tile_display_create" block="Horizontal Tiles: %hArrange|Vertical Tiles: %vArrange|uBit location: %uBitConfig"
+    //% blockId="kitronik_zip_tile_display_create" block="Horizontal Tiles: %hArrange|Vertical Tiles: %vArrange|Calliope location: %uBitConfig"
     //% weight=100 blockGap=8
     //% trackArgs=0,2
     //% blockSetVariable=tileDisplay
