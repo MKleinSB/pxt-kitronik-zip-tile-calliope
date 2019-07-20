@@ -2,8 +2,13 @@
 
 [![Build Status](https://travis-ci.org/MKleinSB/pxt-kitronik-zip-tile-calliope.svg?branch=master)](https://travis-ci.org/MKleinSB/pxt-kitronik-zip-tile-calliope)
 
+![](https://github.com/MKleinSB/pxt-kitronik-zip-tile-calliope/blob/master/1.png) 
+
 Custom blocks for www.kitronik.co.uk/5645 ZIP Tile for BBC micro:bit. Changed for Calliope Mini.
 See website for example code.
+
+## Video
+[![click here to see the sample video](https://i.ytimg.com/vi/ugPYVLvgdng/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLAPqqdBEtQsEBRFl0WDqUTHkJmqIQ)](https://youtu.be/ugPYVLvgdng)
 
 ## Overview
 The ZIP Tile is an 8x8 ZIP LED display for the BBC micro:bit.
