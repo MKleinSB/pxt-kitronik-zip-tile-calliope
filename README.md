@@ -1,5 +1,6 @@
 # pxt-kitronik-zip-tile-calliope
 
+[![Build Status](https://travis-ci.org/MKleinSB/pxt-kitronik-zip-tile-calliope.svg?branch=master)](https://travis-ci.org/MKleinSB/pxt-kitronik-zip-tile-calliope)
 
 Custom blocks for www.kitronik.co.uk/5645 ZIP Tile for BBC micro:bit. Changed for Calliope Mini.
 See website for example code.
