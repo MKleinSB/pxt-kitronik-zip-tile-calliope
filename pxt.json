@@ -1,7 +1,7 @@
 {
     "name": "pxt-kitronik-zip-tile-calliope",
     "version": "0.0.2",
-    "description": "Blocks for driving the Kitronik ZIP Tile",
+    "description": "Blocks for driving the Kitronik ZIP Tile with Calliope Mini",
     "license": "MIT",
     "dependencies": {
         "core": "*",
@@ -12,7 +12,8 @@
         "zip_tile.ts",
         "shims.d.ts",
         "enums.d.ts",
-        "zip_tile.cpp"
+        "zip_tile.cpp",
+        "_locales/de/pxt-kitronik-zip-tile-calliope-strings.json"
     ],
     "testFiles": [
         "tests.ts"
