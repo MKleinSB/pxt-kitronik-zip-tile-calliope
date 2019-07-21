@@ -16,13 +16,12 @@
     "Kitronik_Zip_Tile.TextStyle.None|block": "keiner",
     "Kitronik_Zip_Tile.TextStyle.Underlined|block": "unterstrichen",
     "Kitronik_Zip_Tile.TextStyle.Background|block": "Hintergrund",
-    "kitronik_set_zip_tile_rainbow|block":  "%tileDisplay| zeige Regenbogen von %startHue| nach %endHue", 
-    "kitronik_zip_tile_display_set_strip_color|block": "%tileDisplay|setze Farbe auf %rgb=zip_colors" ,
-    "kitronik_zip_tile_display_rotate|block": "%tileDisplay| rotiere Neopixel um %offset",
-    "kitronik_zip_tile_display_set_matrix_color|block ": "%tileDisplay|setze Matrixfarbe an Position x %x|y %y|auf %rgb=zip_colors" ,
-    "kitronik_zip_tile_scroll_text|block": "%tileDisplay|scrolle %text|%direction|Wartezeit (ms) %delay|Formatierung %style|Formatierungsfarbe %formatRGB=zip_colors|Textfarbe %rgb=zip_colors" ,
-    "kitronik_zip_tile_display_show|block": "%tileDisplay|anzeigen",
-    "kitronik_zip_tile_display_clear|block": "%tileDisplay|löschen",
-    
+    "Kitronik_Zip_Tile.kitronik_set_zip_tile_rainbow|block":  "%tileDisplay| zeige Regenbogen von %startHue| nach %endHue", 
+    "Kitronik_Zip_Tile.kitronik_zip_tile_display_set_strip_color|block": "%tileDisplay|setze Farbe auf %rgb=zip_colors" ,
+    "Kitronik_Zip_Tile.kitronik_zip_tile_display_rotate|block": "%tileDisplay| rotiere Neopixel um %offset",
+    "Kitronik_Zip_Tile.kitronik_zip_tile_display_set_matrix_color|block ": "%tileDisplay|setze Matrixfarbe an Position x %x|y %y|auf %rgb=zip_colors" ,
+    "Kitronik_Zip_Tile.kitronik_zip_tile_scroll_text|block": "%tileDisplay|scrolle %text|%direction|Wartezeit (ms) %delay|Formatierung %style|Formatierungsfarbe %formatRGB=zip_colors|Textfarbe %rgb=zip_colors" ,
+    "Kitronik_Zip_Tile.kitronik_zip_tile_display_show|block": "%tileDisplay|anzeigen",
+    "Kitronik_Zip_Tile.kitronik_zip_tile_display_clear|block": "%tileDisplay|löschen",   
     "Kitronik_Zip_Tile.createZIPTileDisplay|block": "Horizontale Tiles: %hArrange|Vertikale Tiles: %vArrange|Calliopeposition: %uBitConfig"
 }
