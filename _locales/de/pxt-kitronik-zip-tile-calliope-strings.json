@@ -13,7 +13,7 @@
     "Kitronik_Zip_Tile.TextDirection.Up|block": "aufwärts",
     "Kitronik_Zip_Tile.UBitLocations.Hidden|block": "versteckt",
     "Kitronik_Zip_Tile.UBitLocations.Visible|block": "sichtbar",
-    "Kitronik_Zip_Tile.TextStyle.None|block": "keiner",
+    "Kitronik_Zip_Tile.TextStyle.None|block": "keine",
     "Kitronik_Zip_Tile.TextStyle.Underlined|block": "unterstrichen",
     "Kitronik_Zip_Tile.TextStyle.Background|block": "Hintergrund",
     "Kitronik_Zip_Tile.ZIPTileDisplay.showRainbow|block": "%tileDisplay| zeige Regenbogen von %startHue| bis %endHue",
@@ -24,6 +24,6 @@
     "Kitronik_Zip_Tile.ZIPTileDisplay.show|block": "%tileDisplay|anzeigen",
     "Kitronik_Zip_Tile.ZIPTileDisplay.clear|block": "%tileDisplay|löschen",
     "Kitronik_Zip_Tile.ZIPTileDisplay.setBrightness|block": "%tileDisplay|setze Helligkeit %brightness",
-    "Kitronik_Zip_Tile.ZIPTileDisplay.createZIPTileDisplay|block": "horizontale Kacheln: %hArrange|vertikale Kacheln: %vArrange|Calliopeposition: %uBitConfig",
+    "Kitronik_Zip_Tile.createZIPTileDisplay|block": "horizontale Kacheln: %hArrange|vertikale Kacheln: %vArrange|Calliopeposition: %uBitConfig",
     "Kitronik_Zip_Tile.rgb|block": "rot %red|grün %green|blau %blue"
 }
