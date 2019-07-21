@@ -592,7 +592,8 @@ namespace Kitronik_Zip_Tile {
          * Set the pin where the ZIP LED is connected, defaults to P0.
          */
         //% weight=10
-
+        //% blockId="kitronik_zip_tile_setpin" block="set ZIP Tile pin to %pin" blockGap=8
+        //% weight=91
         setPin(pin: DigitalPin): void {
             this.pin = pin;
             pins.digitalWritePin(this.pin, 0);

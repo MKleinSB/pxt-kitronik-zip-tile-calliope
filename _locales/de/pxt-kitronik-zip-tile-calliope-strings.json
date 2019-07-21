@@ -23,5 +23,7 @@
     "Kitronik_Zip_Tile.scrollText|block": "%tileDisplay|scrolle %text|%direction|Wartezeit (ms) %delay|Formatierung %style|Formatierungsfarbe %formatRGB=zip_colors|Textfarbe %rgb=zip_colors",
     "Kitronik_Zip_Tile.show|block": "%tileDisplay|anzeigen",
     "Kitronik_Zip_Tile.clear|block": "%tileDisplay|löschen",
+    "Kitronik_Zip_Tile.setBrightness|block": "%tileDisplay|setze Helligkeit %brightness",
+    "Kitronik_Zip_Tile.setPin|block": "Neopixel an Pin %pin",
     "Kitronik_Zip_Tile.createZIPTileDisplay|block": "horizontale Kacheln: %hArrange|vertikale Kacheln: %vArrange|Calliopeposition: %uBitConfig"
 }
