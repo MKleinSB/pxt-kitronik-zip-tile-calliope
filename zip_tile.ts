@@ -138,9 +138,9 @@ namespace Kitronik_Zip_Tile {
             } else {
                 this.setPixelColor(0, hsl(startHue, saturation, luminance));
                 for (let i = 1; i < steps - 1; i++) {
-                    const h = ((h1_100 + i * hStep)/ 100) + 360;
-                    const s = ((s1_100 + i * sStep)/ 100);
-                    const l = ((l1_100 + i * lStep)/ 100);
+                    const h = ((h1_100 + i * hStep) / 100) + 360;
+                    const s = ((s1_100 + i * sStep) / 100);
+                    const l = ((l1_100 + i * lStep) / 100);
                     this.setPixelColor(i, hsl(h, s, l));
                 }
                 this.setPixelColor(steps - 1, hsl(endHue, saturation, luminance));
@@ -592,8 +592,7 @@ namespace Kitronik_Zip_Tile {
          * Set the pin where the ZIP LED is connected, defaults to P0.
          */
         //% weight=10
-        //% blockId="kitronik_zip_tile_setpin" block="set ZIP Tile pin to %pin" blockGap=8
-        //% weight=91
+
         setPin(pin: DigitalPin): void {
             this.pin = pin;
             pins.digitalWritePin(this.pin, 0);
@@ -786,9 +785,9 @@ namespace Kitronik_Zip_Tile {
         h = h % 360;
         s = Math.clamp(0, 99, s);
         l = Math.clamp(0, 99, l);
-        let c = ((((100 - Math.abs(2 * l - 100)) * s) << 8)/ 10000); //chroma, [0,255]
-        let h1 = (h/ 60);//[0,6]
-        let h2 = ((h - h1 * 60) * 256/ 60);//[0,255]
+        let c = ((((100 - Math.abs(2 * l - 100)) * s) << 8) / 10000); //chroma, [0,255]
+        let h1 = (h / 60);//[0,6]
+        let h2 = ((h - h1 * 60) * 256 / 60);//[0,255]
         let temp = Math.abs((((h1 % 2) << 8) + h2) - 256);
         let x = (c * (256 - (temp))) >> 8;//[0,255], second largest component of this color
         let r$: number;
@@ -807,7 +806,7 @@ namespace Kitronik_Zip_Tile {
         } else if (h1 == 5) {
             r$ = c; g$ = 0; b$ = x;
         }
-        let m = ((((l * 2 << 8)/ 100) - c)/ 2);
+        let m = ((((l * 2 << 8) / 100) - c) / 2);
         let r = r$ + m;
         let g = g$ + m;
         let b = b$ + m;
