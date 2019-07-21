@@ -16,15 +16,13 @@
     "Kitronik_Zip_Tile.TextStyle.None|block": "keiner",
     "Kitronik_Zip_Tile.TextStyle.Underlined|block": "unterstrichen",
     "Kitronik_Zip_Tile.TextStyle.Background|block": "Hintergrund",
-    "kitronik_set_zip_tile_rainbow|block":  "%tileDisplay|show rainbow from %startHue|to %endHue" 
+    "kitronik_set_zip_tile_rainbow|block":  "%tileDisplay| zeige Regenbogen von %startHue| nach %endHue", 
+    "kitronik_zip_tile_display_set_strip_color|block": "%tileDisplay|setze Farbe auf %rgb=zip_colors" ,
+    "kitronik_zip_tile_display_rotate|block": "%tileDisplay| rotiere Neopixel um %offset",
+    "kitronik_zip_tile_display_set_matrix_color|block ": "%tileDisplay|setze Matrixfarbe an Position x %x|y %y|auf %rgb=zip_colors" ,
+    "kitronik_zip_tile_scroll_text|block": "%tileDisplay|scrolle %text|%direction|Wartezeit (ms) %delay|Formatierung %style|Formatierungsfarbe %formatRGB=zip_colors|Textfarbe %rgb=zip_colors" ,
+    "kitronik_zip_tile_display_show|block": "%tileDisplay|anzeigen",
+    "kitronik_zip_tile_display_clear|block": "%tileDisplay|löschen",
     
-    
-    "Motors.Motor4|block": "Motor 4",
-    "Kitronik_Robotics_Board.servoWrite|block ": "Schreibe |%Servo| auf |%degrees|Grad",
-    "Kitronik_Robotics_Board.motorOn|block": "%motor|in Richtung %dir|mit Geschwindigkeit %speed",
-    "Kitronik_Robotics_Board.motorOff|block": "Schalte %motor| aus ",
-    "Kitronik_Robotics_Board.allOff|block": "Alle Motoren ausschalten",
-    "Kitronik_Robotics_Board.setStepperMotorSteps|block": "%stepper|braucht %steps|Schritte für eine volle Umdrehung",
-    "Kitronik_Robotics_Board.stepperMotorTurnAngle|block": "Drehe %stepper|%dir|um %angle|Grad",
-    "Kitronik_Robotics_Board.stepperMotorTurnSteps|block": "Drehe %stepper|%dir| um %steps|Schritte"
+    "Kitronik_Zip_Tile.createZIPTileDisplay|block": "Horizontale Tiles: %hArrange|Vertikale Tiles: %vArrange|Calliopeposition: %uBitConfig"
 }
