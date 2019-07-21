@@ -1,0 +1,30 @@
+{
+    "ZipLedColors.Red|block": "Rot",
+    "ZipLedColors.Orange|block": "Orange",
+    "ZipLedColors.Yellow|block": "Gelb",
+    "ZipLedColors.Green|block": "Grün",
+    "ZipLedColors.Blue|block": "Blau",
+    "ZipLedColors.Indigo|block": "Indigo",
+    "ZipLedColors.Violet|block": "Veilchenblau",
+    "ZipLedColors.Purple|block": "Violett",
+    "ZipLedColors.White|block": "Weiß",
+    "ZipLedColors.Black|block": "Schwarz",
+    "Kitronik_Zip_Tile.TextDirection.Left|block": "links",
+    "Kitronik_Zip_Tile.TextDirection.Right|block": "rechts",
+    "Kitronik_Zip_Tile.UBitLocations.Hidden|block": "versteckt",
+    "Kitronik_Zip_Tile.UBitLocations.Visible|block": "sichtbar",        
+    "Kitronik_Zip_Tile.TextStyle.None|block": "keiner",
+    "Kitronik_Zip_Tile.TextStyle.Underlined|block": "unterstrichen",
+    "Kitronik_Zip_Tile.TextStyle.Background|block": "Hintergrund",
+    "kitronik_set_zip_tile_rainbow|block":  "%tileDisplay|show rainbow from %startHue|to %endHue" 
+    
+    
+    "Motors.Motor4|block": "Motor 4",
+    "Kitronik_Robotics_Board.servoWrite|block ": "Schreibe |%Servo| auf |%degrees|Grad",
+    "Kitronik_Robotics_Board.motorOn|block": "%motor|in Richtung %dir|mit Geschwindigkeit %speed",
+    "Kitronik_Robotics_Board.motorOff|block": "Schalte %motor| aus ",
+    "Kitronik_Robotics_Board.allOff|block": "Alle Motoren ausschalten",
+    "Kitronik_Robotics_Board.setStepperMotorSteps|block": "%stepper|braucht %steps|Schritte für eine volle Umdrehung",
+    "Kitronik_Robotics_Board.stepperMotorTurnAngle|block": "Drehe %stepper|%dir|um %angle|Grad",
+    "Kitronik_Robotics_Board.stepperMotorTurnSteps|block": "Drehe %stepper|%dir| um %steps|Schritte"
+}
