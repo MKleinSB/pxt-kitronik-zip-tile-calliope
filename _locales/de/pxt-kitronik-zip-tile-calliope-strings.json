@@ -19,7 +19,7 @@
     "Kitronik_Zip_Tile.ZIPTileDisplay.showRainbow|block": "%tileDisplay| zeige Regenbogen von %startHue| bis %endHue",
     "Kitronik_Zip_Tile.ZIPTileDisplay.showColor|block": "%tileDisplay|setze Farbe auf %rgb=zip_colors",
     "Kitronik_Zip_Tile.ZIPTileDisplay.rotate|block": "%tileDisplay| rotiere Neopixel um %offset",
-    "Kitronik_Zip_Tile.ZIPTileDisplay.setMatrixColor|block ": "%tileDisplay|setze Matrixfarbe an Position x %x|y %y|auf %rgb=zip_colors",
+    "Kitronik_Zip_Tile.ZIPTileDisplay.setMatrixColor|block": "%tileDisplay|setze Matrixfarbe an Position x %x|y %y|auf %rgb=zip_colors",
     "Kitronik_Zip_Tile.ZIPTileDisplay.scrollText|block": "%tileDisplay|scrolle %text|%direction|Wartezeit (ms) %delay|Formatierung %style|Formatierungsfarbe %formatRGB=zip_colors|Textfarbe %rgb=zip_colors",
     "Kitronik_Zip_Tile.ZIPTileDisplay.show|block": "%tileDisplay|anzeigen",
     "Kitronik_Zip_Tile.ZIPTileDisplay.clear|block": "%tileDisplay|löschen",
