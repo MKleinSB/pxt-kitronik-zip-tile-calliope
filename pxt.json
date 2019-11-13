@@ -1,6 +1,6 @@
 {
     "name": "pxt-kitronik-zip-tile-calliope",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "Blocks for driving the Kitronik ZIP Tile with Calliope Mini",
     "license": "MIT",
     "dependencies": {
