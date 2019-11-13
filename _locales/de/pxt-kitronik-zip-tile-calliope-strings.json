@@ -26,4 +26,5 @@
     "Kitronik_Zip_Tile.ZIPTileDisplay.setBrightness|block": "%tileDisplay|setze Helligkeit %brightness",
     "Kitronik_Zip_Tile.createZIPTileDisplay|block": "horizontale Kacheln: %hArrange|vertikale Kacheln: %vArrange|Calliopeposition: %uBitConfig",
     "Kitronik_Zip_Tile.rgb|block": "rot %red|grün %green|blau %blue"
+    
 }
