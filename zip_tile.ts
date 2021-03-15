@@ -38,18 +38,6 @@ namespace Kitronik_Zip_Tile {
         Up
     }
 
-	/**
-	 * Different modes for RGB or RGB+W ZIP strips
-	 */
-    export enum ZipLedMode {
-        //% block="RGB (GRB format)"
-        RGB = 0,
-        //% block="RGB+W"
-        RGBW = 1,
-        //% block="RGB (RGB format)"
-        RGB_RGB = 2
-    }
-
     /**
      * Different configurations for micro:bit location in a multi-tile display
      * Use standard for a single tile
@@ -79,7 +67,6 @@ namespace Kitronik_Zip_Tile {
         brightness: number;
         start: number;
         _length: number;
-        _mode: ZipLedMode;
         _matrixWidth: number;
         _matrixHeight: number;
         _uBitLocation: UBitLocations;
@@ -105,9 +92,9 @@ namespace Kitronik_Zip_Tile {
             const h1 = startHue;
             const h2 = endHue;
             const hDistCW = ((h2 + 360) - h1) % 360;
-            const hStepCW = (hDistCW * 100) / steps;
+            const hStepCW = Math.idiv((hDistCW * 100), steps);
             const hDistCCW = ((h1 + 360) - h2) % 360;
-            const hStepCCW = (-(hDistCCW * 100) / steps);
+            const hStepCCW = Math.idiv(-(hDistCCW * 100), steps);
             let hStep: number;
             if (direction === HueInterpolationDirection.Clockwise) {
                 hStep = hStepCW;
@@ -122,14 +109,14 @@ namespace Kitronik_Zip_Tile {
             const s1 = saturation;
             const s2 = saturation;
             const sDist = s2 - s1;
-            const sStep = (sDist / steps);
+            const sStep = Math.idiv(sDist, steps);
             const s1_100 = s1 * 100;
 
             //lum
             const l1 = luminance;
             const l2 = luminance;
             const lDist = l2 - l1;
-            const lStep = (lDist / steps);
+            const lStep = Math.idiv(lDist, steps);
             const l1_100 = l1 * 100
 
             //interpolate
@@ -138,9 +125,9 @@ namespace Kitronik_Zip_Tile {
             } else {
                 this.setPixelColor(0, hsl(startHue, saturation, luminance));
                 for (let i = 1; i < steps - 1; i++) {
-                    const h = ((h1_100 + i * hStep) / 100) + 360;
-                    const s = ((s1_100 + i * sStep) / 100);
-                    const l = ((l1_100 + i * lStep) / 100);
+                    const h = Math.idiv((h1_100 + i * hStep), 100) + 360;
+                    const s = Math.idiv((s1_100 + i * sStep), 100);
+                    const l = Math.idiv((l1_100 + i * lStep), 100);
                     this.setPixelColor(i, hsl(h, s, l));
                 }
                 this.setPixelColor(steps - 1, hsl(endHue, saturation, luminance));
@@ -156,11 +143,10 @@ namespace Kitronik_Zip_Tile {
         //% blockId="kitronik_zip_tile_display_rotate" block="%tileDisplay|rotate ZIP LEDs by %offset" blockGap=8
         //% weight=93
         rotate(offset: number = 1): void {
-            const stride = this._mode === ZipLedMode.RGBW ? 4 : 3;
-            this.buf.rotate(-offset * stride, this.start * stride, this._length * stride)
+            this.buf.rotate(-offset * 3, this.start * 3, this._length * 3)
         }
 
-    	/**
+        /**
          * Shows whole ZIP Tile display as a given color (range 0-255 for r, g, b). 
          * @param rgb RGB color of the LED
          */
@@ -172,7 +158,7 @@ namespace Kitronik_Zip_Tile {
             this.show();
         }
 
-    	/**
+        /**
          * Set LED to a given color (range 0-255 for r, g, b) in the matrix 
          * You need to call ``show`` to make the changes visible.
          * @param x horizontal position
@@ -185,7 +171,7 @@ namespace Kitronik_Zip_Tile {
             let LEDS_ON_PANEL = 64
             let COLUMNS = this._matrixWidth
             let ROWS = this._matrixHeight
-            let totalPanels = (this._length / LEDS_ON_PANEL)
+            let totalPanels = (this._length/LEDS_ON_PANEL)
             let currentPanel = 0
             let i = 0
             x = x >> 0
@@ -194,8 +180,8 @@ namespace Kitronik_Zip_Tile {
             if (x < 0 || x >= COLUMNS || y < 0 || y >= ROWS) return
             let yDiv = y / 8
             let xDiv = x / 8
-            let floorY = (yDiv)
-            let floorX = (xDiv)
+            let floorY = Math.floor(yDiv)
+            let floorX = Math.floor(xDiv)
             //If statement checks the tile arrangement: 1 row of tiles (inc. single tile), 2 tiles connected top to top, or a 2 x 2 arrangement
             if (ROWS == 8) {
                 switch (this._uBitLocation) {
@@ -204,7 +190,7 @@ namespace Kitronik_Zip_Tile {
                         i = (x + 8 * y) + (floorX * (LEDS_ON_PANEL - 8))
                         break
                     case UBitLocations.Visible:
-                        i = (((COLUMNS / 8) * LEDS_ON_PANEL) - 1) - (x + 8 * y) - (floorX * (LEDS_ON_PANEL - 8))
+                        i = (((COLUMNS/8)*LEDS_ON_PANEL)-1) - (x + 8 * y) - (floorX * (LEDS_ON_PANEL - 8))
                         break
                 }
             }
@@ -256,9 +242,9 @@ namespace Kitronik_Zip_Tile {
             let LEDS_ON_PANEL = 64
             let COLUMNS = this._matrixWidth
             let ROWS = this._matrixHeight
-            let totalPanels = (this._length / LEDS_ON_PANEL)
+            let totalPanels = (this._length/LEDS_ON_PANEL)
             let textBrightness = this.brightness
-            let backBrightness = textBrightness / 6
+            let backBrightness = textBrightness/6
             let lineColOffset = 0
             let centreOffsetH = 0 //Horizontal centre offset
             let centreOffsetV = 0 //Vertical centre offset
@@ -268,11 +254,11 @@ namespace Kitronik_Zip_Tile {
             let textChar = 0
 
             if (COLUMNS > 8) {
-                centreOffsetH = (COLUMNS / 2) - 4
+                centreOffsetH = (COLUMNS/2) - 4
             }
 
             if (ROWS > 8) {
-                centreOffsetV = (ROWS / 2) - 4
+                centreOffsetV = (ROWS/2) - 4
             }
 
             switch (direction) {
@@ -281,13 +267,13 @@ namespace Kitronik_Zip_Tile {
                         textHeight += 6
                     }
                     /////////////////////////////////////////////////////////
-                    //Setup for static text display TO DO 				   //
-                    //if (textHeight <= ROWS) {							   //
+                    //Setup for static text display TO DO                  //
+                    //if (textHeight <= ROWS) {                            //
                     //    //Make text static display for set length of time//
-                    //    break											   //
-                    //}													   //
+                    //    break                                            //
+                    //}                                                    //
                     /////////////////////////////////////////////////////////
-                    for (let row = 0; row < textHeight + ROWS; row++) {
+                    for (let row = 0; row < textHeight + ROWS; row ++) {
                         this.clear()
                         if (style == TextStyle.Background) {
                             this.brightness = backBrightness
@@ -310,8 +296,8 @@ namespace Kitronik_Zip_Tile {
                                     if ((textData[c_row] & (1 << (4 - c_col))) > 0) {
                                         let yValue = ((-row + ROWS) + offsetRow + c_row)
                                         let yDiv = yValue / 8
-                                        let floorY = (yDiv)
-                                        let floorX = ((2 + c_col + centreOffsetH) / 8)
+                                        let floorY = Math.floor(yDiv)
+                                        let floorX = Math.floor((2 + c_col + centreOffsetH)/8)
                                         if (ROWS > 8 && COLUMNS <= 8) {
                                             if (this._uBitLocation == UBitLocations.Hidden) {
                                                 if (yValue < 8) {
@@ -343,7 +329,7 @@ namespace Kitronik_Zip_Tile {
                                                         i = ((2 + c_col + centreOffsetH) + (8 * yValue)) + (floorX * (LEDS_ON_PANEL - 8))
                                                         break
                                                     case UBitLocations.Visible:
-                                                        i = (((COLUMNS / 8) * LEDS_ON_PANEL) - 1) - ((2 + c_col + centreOffsetH) + (8 * yValue)) - (floorX * (LEDS_ON_PANEL - 8))
+                                                        i = (((COLUMNS/8)*LEDS_ON_PANEL)-1) - ((2 + c_col + centreOffsetH) + (8 * yValue)) - (floorX * (LEDS_ON_PANEL - 8))
                                                         break
                                                 }
                                                 this.setPixelColor(i, rgb)
@@ -381,32 +367,32 @@ namespace Kitronik_Zip_Tile {
                         textLength += charWidth(text.charAt(textChar)) + 1
                     }
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
-                    //Setup for static text display TO DO 															   //
-                    //if (textLength <= COLUMNS) { 																	   //
-                    //    //Make text static display for set length of time 										   //
-                    //    for (let column = 0; column < COLUMNS; column++) { 										   //
-                    //        for (let stringLength = 0; stringLength < text.length; stringLength++) {	               //
-                    //            this.brightness = textBrightness 													   //
-                    //            let width = charWidth(text.charAt(stringLength)) 									   //
-                    //            let textData: Buffer = getChar(text.charAt(stringLength)) 						   //
-                    //            for (let c_row = 0; c_row < 5; c_row++) { 										   //
-                    //                for (let c_col = 0; c_col < 5; c_col++) { 									   //
-                    //                    if ((textData[c_row] & (1 << (4 - c_col))) > 0) { 						   //
-                    //                        let xValue = COLUMNS + c_col 											   //
-                    //                        let xDiv = xValue / 8 												   //
-                    //                        let floorX = Math.floor(xDiv) 										   //
-                    //                        if (xValue < COLUMNS && xValue >= 0) { 								   //
+                    //Setup for static text display TO DO                                                              //
+                    //if (textLength <= COLUMNS) {                                                                     //
+                    //    //Make text static display for set length of time                                            //
+                    //    for (let column = 0; column < COLUMNS; column++) {                                           //
+                    //        for (let stringLength = 0; stringLength < text.length; stringLength++) {                 //
+                    //            this.brightness = textBrightness                                                     //
+                    //            let width = charWidth(text.charAt(stringLength))                                     //
+                    //            let textData: Buffer = getChar(text.charAt(stringLength))                            //
+                    //            for (let c_row = 0; c_row < 5; c_row++) {                                            //
+                    //                for (let c_col = 0; c_col < 5; c_col++) {                                        //
+                    //                    if ((textData[c_row] & (1 << (4 - c_col))) > 0) {                            //
+                    //                        let xValue = COLUMNS + c_col                                             //
+                    //                        let xDiv = xValue / 8                                                    //
+                    //                        let floorX = Math.floor(xDiv)                                            //
+                    //                        if (xValue < COLUMNS && xValue >= 0) {                                   //
                     //                            let i = (xValue + ((2 + c_row) * 8)) + (floorX * (LEDS_ON_PANEL - 8))//
-                    //                            this.setPixelColor(i, rgb) 										   //
-                    //                        } 																	   //
-                    //                    } 																		   //
-                    //                } 																			   //
-                    //            } 																				   //
-                    //        } 																					   //
-                    //    } 																						   //
-                    //    this.show() 																				   //
-                    //    break 																					   //
-                    //} 																							   //
+                    //                            this.setPixelColor(i, rgb)                                           //
+                    //                        }                                                                        //
+                    //                    }                                                                            //
+                    //                }                                                                                //
+                    //            }                                                                                    //
+                    //        }                                                                                        //
+                    //    }                                                                                            //
+                    //    this.show()                                                                                  //
+                    //    break                                                                                        //
+                    //}                                                                                                //
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
                     for (let column = 0; column < textLength + COLUMNS; column++) {
                         this.clear()
@@ -416,8 +402,8 @@ namespace Kitronik_Zip_Tile {
                         }
                         if (style == TextStyle.Underlined) {
                             let lineCol = COLUMNS - column - 1
-                            let floorLineCol = (lineCol / 8)
-                            let floorY = ((7 + centreOffsetV) / 8)
+                            let floorLineCol = Math.floor(lineCol / 8)
+                            let floorY = Math.floor((7 + centreOffsetV)/8)
                             let lineLED = 0
                             if (COLUMNS == 16 && ROWS == 16) {
                                 switch (this._uBitLocation) {
@@ -436,18 +422,18 @@ namespace Kitronik_Zip_Tile {
                                         lineLED = lineCol + (7 * 8) + (floorLineCol * (LEDS_ON_PANEL - 8))
                                         break
                                     case UBitLocations.Visible:
-                                        lineLED = (((COLUMNS / 8) * LEDS_ON_PANEL) - 1) - (lineCol + (7 * 8)) - (floorLineCol * (LEDS_ON_PANEL - 8))
+                                        lineLED = (((COLUMNS/8)*LEDS_ON_PANEL)-1) - (lineCol + (7 * 8)) - (floorLineCol * (LEDS_ON_PANEL - 8))
                                         break
                                 }
                             }
                             this.setPixelColor(lineLED, formatRGB)
-
-                            for (let extraLineCol = lineCol; extraLineCol < COLUMNS; extraLineCol++) {
+                            
+                            for (let extraLineCol = lineCol; extraLineCol < COLUMNS; extraLineCol ++) {
                                 if (extraLineCol < 0 || extraLineCol > COLUMNS) {
                                     continue
                                 }
-                                let floorExtraLineCol = (extraLineCol / 8)
-                                let floorY = ((7 + centreOffsetV) / 8)
+                                let floorExtraLineCol = Math.floor(extraLineCol / 8)
+                                let floorY = Math.floor((7 + centreOffsetV)/8)
                                 let extraLineLED = 0
                                 if (COLUMNS == 16 && ROWS == 16) {
                                     switch (this._uBitLocation) {
@@ -466,7 +452,7 @@ namespace Kitronik_Zip_Tile {
                                             extraLineLED = extraLineCol + (7 * 8) + (floorExtraLineCol * (LEDS_ON_PANEL - 8))
                                             break
                                         case UBitLocations.Visible:
-                                            extraLineLED = (((COLUMNS / 8) * LEDS_ON_PANEL) - 1) - (extraLineCol + (7 * 8)) - (floorExtraLineCol * (LEDS_ON_PANEL - 8))
+                                            extraLineLED = (((COLUMNS/8)*LEDS_ON_PANEL)-1) - (extraLineCol + (7 * 8)) - (floorExtraLineCol * (LEDS_ON_PANEL - 8))
                                             break
                                     }
                                 }
@@ -500,8 +486,8 @@ namespace Kitronik_Zip_Tile {
                                     if ((textData[c_row] & (1 << (4 - c_col))) > 0) {
                                         let xValue = (-column + COLUMNS) + offsetColumn + c_col
                                         let xDiv = xValue / 8
-                                        let floorX = (xDiv)
-                                        let floorY = ((2 + c_row + centreOffsetV) / 8)
+                                        let floorX = Math.floor(xDiv)
+                                        let floorY = Math.floor((2 + c_row + centreOffsetV)/8)
                                         if (xValue < COLUMNS && xValue >= 0) {
                                             let i = 0
                                             if (COLUMNS == 16 && ROWS == 16) {
@@ -522,7 +508,7 @@ namespace Kitronik_Zip_Tile {
                                                         i = (xValue + ((2 + c_row) * 8)) + (floorX * (LEDS_ON_PANEL - 8))
                                                         break
                                                     case UBitLocations.Visible:
-                                                        i = (((COLUMNS / 8) * LEDS_ON_PANEL) - 1) - (xValue + ((2 + c_row) * 8)) - (floorX * (LEDS_ON_PANEL - 8))
+                                                        i = (((COLUMNS/8)*LEDS_ON_PANEL)-1) - (xValue + ((2 + c_row) * 8)) - (floorX * (LEDS_ON_PANEL - 8))
                                                         break
                                                 }
                                             }
@@ -546,7 +532,7 @@ namespace Kitronik_Zip_Tile {
                         if (column > textLength + 1) {
                             endOfLine--
                         }
-                    }
+                    }  
                     break
             }
             if (style != TextStyle.None) {
@@ -562,7 +548,9 @@ namespace Kitronik_Zip_Tile {
         //% blockId="kitronik_zip_tile_display_show" block="%tileDisplay|show" blockGap=8
         //% weight=96
         show() {
-            ws2812b.sendBuffer(this.buf, this.pin);
+            //ws2812b.sendBuffer(this.buf, this.pin, this.brightness);
+            // Use the pxt-microbit core version which now respects brightness (10/2020)
+            light.sendWS2812BufferWithBrightness(this.buf, this.pin, this.brightness);
         }
 
         /**
@@ -571,10 +559,8 @@ namespace Kitronik_Zip_Tile {
          */
         //% blockId="kitronik_zip_tile_display_clear" block="%tileDisplay|clear"
         //% weight=95
-
         clear(): void {
-            const stride = this._mode === ZipLedMode.RGBW ? 4 : 3;
-            this.buf.fill(0, this.start * stride, this._length * stride);
+            this.buf.fill(0, this.start * 3, this._length * 3);
         }
 
         /**
@@ -583,16 +569,25 @@ namespace Kitronik_Zip_Tile {
          */
         //% blockId="kitronik_zip_tile_display_set_brightness" block="%tileDisplay|set brightness %brightness" blockGap=8
         //% weight=92
-
         setBrightness(brightness: number): void {
+            //Clamp incoming variable at 0-255 Math.clamp didnt work...
+            if(brightness <0)
+            {
+              brightness = 0
+            }
+            else if (brightness > 255)
+            {
+              brightness = 255
+            }
             this.brightness = brightness & 0xff;
+            basic.pause(1) //add a pause to stop weirdnesses
         }
 
         /**
          * Set the pin where the ZIP LED is connected, defaults to P0.
          */
         //% weight=10
-
+        
         setPin(pin: DigitalPin): void {
             this.pin = pin;
             pins.digitalWritePin(this.pin, 0);
@@ -604,13 +599,8 @@ namespace Kitronik_Zip_Tile {
         }
 
         private setBufferRGB(offset: number, red: number, green: number, blue: number): void {
-            if (this._mode === ZipLedMode.RGB_RGB) {
-                this.buf[offset + 0] = red;
-                this.buf[offset + 1] = green;
-            } else {
-                this.buf[offset + 0] = green;
-                this.buf[offset + 1] = red;
-            }
+            this.buf[offset + 0] = green;
+            this.buf[offset + 1] = red;
             this.buf[offset + 2] = blue;
         }
 
@@ -619,31 +609,9 @@ namespace Kitronik_Zip_Tile {
             let green = unpackG(rgb);
             let blue = unpackB(rgb);
 
-            const br = this.brightness;
-            if (br < 255) {
-                red = (red * br) >> 8;
-                green = (green * br) >> 8;
-                blue = (blue * br) >> 8;
-            }
             const end = this.start + this._length;
-            const stride = this._mode === ZipLedMode.RGBW ? 4 : 3;
             for (let i = this.start; i < end; ++i) {
-                this.setBufferRGB(i * stride, red, green, blue)
-            }
-        }
-        private setAllW(white: number) {
-            if (this._mode !== ZipLedMode.RGBW)
-                return;
-
-            let br = this.brightness;
-            if (br < 255) {
-                white = (white * br) >> 8;
-            }
-            let buf = this.buf;
-            let end = this.start + this._length;
-            for (let i = this.start; i < end; ++i) {
-                let ledoffset = i * 4;
-                buf[ledoffset + 3] = white;
+                this.setBufferRGB(i * 3, red, green, blue)
             }
         }
         private setPixelRGB(pixeloffset: number, rgb: number): void {
@@ -651,37 +619,13 @@ namespace Kitronik_Zip_Tile {
                 || pixeloffset >= this._length)
                 return;
 
-            let stride = this._mode === ZipLedMode.RGBW ? 4 : 3;
-            pixeloffset = (pixeloffset + this.start) * stride;
+            pixeloffset = (pixeloffset + this.start) * 3;
 
             let red = unpackR(rgb);
             let green = unpackG(rgb);
             let blue = unpackB(rgb);
 
-            let br = this.brightness;
-            if (br < 255) {
-                red = (red * br) >> 8;
-                green = (green * br) >> 8;
-                blue = (blue * br) >> 8;
-            }
             this.setBufferRGB(pixeloffset, red, green, blue)
-        }
-        private setPixelW(pixeloffset: number, white: number): void {
-            if (this._mode !== ZipLedMode.RGBW)
-                return;
-
-            if (pixeloffset < 0
-                || pixeloffset >= this._length)
-                return;
-
-            pixeloffset = (pixeloffset + this.start) * 4;
-
-            let br = this.brightness;
-            if (br < 255) {
-                white = (white * br) >> 8;
-            }
-            let buf = this.buf;
-            buf[pixeloffset + 3] = white;
         }
     }
 
@@ -691,22 +635,20 @@ namespace Kitronik_Zip_Tile {
      * @param vArrange the number of ZIP Tiles connected vertically, eg: 1
      * @param uBitConfig postion of the microbit in the display (for a single tile, leave as 'Standard')
      */
-    //% blockId="kitronik_zip_tile_display_create" block="Horizontal Tiles: %hArrange|Vertical Tiles: %vArrange|Calliope location: %uBitConfig"
+    //% blockId="kitronik_zip_tile_display_create" block="Horizontal Tiles: %hArrange|Vertical Tiles: %vArrange|uBit location: %uBitConfig"
     //% weight=100 blockGap=8
     //% trackArgs=0,2
     //% blockSetVariable=tileDisplay
     export function createZIPTileDisplay(hArrange: number, vArrange: number, uBitConfig: UBitLocations): ZIPTileDisplay {
         let tileDisplay = new ZIPTileDisplay();
-        let stride = 0 === ZipLedMode.RGBW ? 4 : 3;
-        tileDisplay.buf = pins.createBuffer((hArrange * vArrange * 64) * stride);
+        tileDisplay.buf = pins.createBuffer((hArrange * vArrange * 64) * 3);
         tileDisplay.start = 0;
         tileDisplay._length = (hArrange * vArrange * 64);
-        tileDisplay._mode = 0;
-        tileDisplay._matrixWidth = (hArrange * 8);
-        tileDisplay._matrixHeight = (vArrange * 8);
+        tileDisplay._matrixWidth = (hArrange*8);
+        tileDisplay._matrixHeight = (vArrange*8);
         tileDisplay._uBitLocation = uBitConfig;
         tileDisplay.setBrightness(255)
-        tileDisplay.setPin(DigitalPin.C16) //P0
+        tileDisplay.setPin(DigitalPin.P0)
         return tileDisplay;
     }
 
@@ -778,16 +720,16 @@ namespace Kitronik_Zip_Tile {
      * Converts a hue saturation luminosity value into a RGB color
      */
     function hsl(h: number, s: number, l: number): number {
-
-
-
-
+        h = Math.round(h);
+        s = Math.round(s);
+        l = Math.round(l);
+        
         h = h % 360;
         s = Math.clamp(0, 99, s);
         l = Math.clamp(0, 99, l);
-        let c = ((((100 - Math.abs(2 * l - 100)) * s) << 8) / 10000); //chroma, [0,255]
-        let h1 = (h / 60);//[0,6]
-        let h2 = ((h - h1 * 60) * 256 / 60);//[0,255]
+        let c = Math.idiv((((100 - Math.abs(2 * l - 100)) * s) << 8), 10000); //chroma, [0,255]
+        let h1 = Math.idiv(h, 60);//[0,6]
+        let h2 = Math.idiv((h - h1 * 60) * 256, 60);//[0,255]
         let temp = Math.abs((((h1 % 2) << 8) + h2) - 256);
         let x = (c * (256 - (temp))) >> 8;//[0,255], second largest component of this color
         let r$: number;
@@ -806,7 +748,7 @@ namespace Kitronik_Zip_Tile {
         } else if (h1 == 5) {
             r$ = c; g$ = 0; b$ = x;
         }
-        let m = ((((l * 2 << 8) / 100) - c) / 2);
+        let m = Math.idiv((Math.idiv((l * 2 << 8), 100) - c), 2);
         let r = r$ + m;
         let g = g$ + m;
         let b = b$ + m;
