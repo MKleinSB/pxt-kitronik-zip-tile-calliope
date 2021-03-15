@@ -643,11 +643,11 @@ namespace Kitronik_Zip_Tile {
      * @param vArrange the number of ZIP Tiles connected vertically, eg: 1
      * @param uBitConfig postion of the microbit in the display (for a single tile, leave as 'Standard')
      */
-    //% blockId="kitronik_zip_tile_display_create" block="Horizontal Tiles: %hArrange|Vertical Tiles: %vArrange|uBit location: %uBitConfig"
+    //% blockId="kitronik_zip_tile_display_create" block="at pin: %dPin|Horizontal Tiles: %hArrange|Vertical Tiles: %vArrange|uBit location: %uBitConfig"
     //% weight=100 blockGap=8
     //% trackArgs=0,2
     //% blockSetVariable=tileDisplay
-    export function createZIPTileDisplay(hArrange: number, vArrange: number, uBitConfig: UBitLocations): ZIPTileDisplay {
+    export function createZIPTileDisplay(dPin:DigitalPin, hArrange: number, vArrange: number, uBitConfig: UBitLocations): ZIPTileDisplay {
         let tileDisplay = new ZIPTileDisplay();
         tileDisplay.buf = pins.createBuffer((hArrange * vArrange * 64) * 3);
         tileDisplay.start = 0;
@@ -656,7 +656,7 @@ namespace Kitronik_Zip_Tile {
         tileDisplay._matrixHeight = (vArrange*8);
         tileDisplay._uBitLocation = uBitConfig;
         tileDisplay.setBrightness(255)
-        tileDisplay.setPin(DigitalPin.C16)
+        tileDisplay.setPin(dPin)
         return tileDisplay;
     }
 
