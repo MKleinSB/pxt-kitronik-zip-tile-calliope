@@ -23,6 +23,14 @@ enum ZipLedColors {
     //% block=black
     Black = 0x000000
 }
+
+namespace light {
+        export function sendWS2812BufferWithBrightness(buf:Buffer, pin:DigitalPin, brightness:number): void {
+        ws2812b.sendBuffer(buf, pin);
+    }
+
+}
+
 /**
  * Kitronik ZIP Tile MakeCode Package
  */
@@ -648,7 +656,7 @@ namespace Kitronik_Zip_Tile {
         tileDisplay._matrixHeight = (vArrange*8);
         tileDisplay._uBitLocation = uBitConfig;
         tileDisplay.setBrightness(255)
-        tileDisplay.setPin(DigitalPin.P0)
+        tileDisplay.setPin(DigitalPin.C16)
         return tileDisplay;
     }
 
